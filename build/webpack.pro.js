@@ -1,10 +1,8 @@
-const merge = require('webpack-merge');
-const base = require('./webpack.base');
 const { resolve } = require('./utils');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const config = merge(base, {
+const config = {
   mode: 'production',
   entry: {
     main: resolve('../src/index.js')
@@ -14,7 +12,7 @@ const config = merge(base, {
     filename: 'vue-layui.common.js',
     libraryExport: 'default',
     library: 'vueLayui',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
@@ -44,6 +42,6 @@ const config = merge(base, {
       }
     })
   ]
-});
+};
 
 module.exports = config;

@@ -34,7 +34,7 @@
           'layui-select-group': group
         }"
       >
-        <dd class="layui-select-tips">
+        <dd class="layui-select-tips" @mousedown="blurStop = true"  @click.stop="selectOption">
           {{ placeholder }}
         </dd>
         <span
@@ -132,7 +132,15 @@ export default {
 
       this.isOpen = !this.isOpen;
     },
+    placeChange () {
+      console.log('test');
+    },
     selectOption: function (item) {
+      if (!item) {
+        this.$emit('input', '');
+        this.$emit('change', '');
+        return;
+      }
       if (!this.disabled) {
         this.selectText = item[this.prop.lable];
         this.$emit('input', item[this.prop.value]);
